@@ -1,5 +1,6 @@
 from pathlib import Path
 from contextlib import asynccontextmanager
+from fastapi.responses import Response
 
 from fastapi import FastAPI
 from fastapi.responses import FileResponse
@@ -39,7 +40,10 @@ app.include_router(analytics.router)
 app.include_router(forecasting.router)
 app.include_router(auth.router)
 
-
+@app.head("/")
+async def root_head():
+    return Response(status_code=200)
+    
 @app.get("/")
 async def root():
     return FileResponse(FRONTEND_DIR / "index.html")
