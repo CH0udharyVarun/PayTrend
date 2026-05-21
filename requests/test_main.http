@@ -1,0 +1,33 @@
+# Test your FastAPI endpoints
+
+GET http://127.0.0.1:8000/
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/transactions
+Accept: application/json
+
+###
+
+POST http://127.0.0.1:8000/transactions
+Content-Type: application/json
+
+{
+  "date": "2026-01-12",
+  "merchant": "Northstar Retail",
+  "category": "Ecommerce",
+  "method": "UPI",
+  "region": "West",
+  "amount": 845000
+}
+
+###
+
+GET http://127.0.0.1:8000/analytics/summary
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/forecasting/growth?horizon_months=6
+Accept: application/json

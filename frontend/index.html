@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PayTrend Analytics</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <section class="auth-screen" id="authScreen">
+      <div class="auth-brand">
+        <div class="brand-mark" aria-hidden="true">
+          <span></span>
+        </div>
+        <div>
+          <strong>PayTrend</strong>
+          <small>User Workspace Access</small>
+        </div>
+      </div>
+      <div class="auth-layout">
+        <div class="auth-copy">
+          <p class="eyebrow">Private Analytics Workspace</p>
+          <h1>Sign in to analyze your own payment data.</h1>
+          <p>Each account gets a separate transaction workspace, dashboard metrics, and forecast view.</p>
+        </div>
+        <div class="auth-card">
+          <div class="auth-tabs" role="tablist" aria-label="Authentication">
+            <button class="active" id="signinTab" type="button">Sign In</button>
+            <button id="signupTab" type="button">Create Account</button>
+          </div>
+
+          <form id="signinForm" class="auth-form">
+            <label>
+              Email
+              <input name="email" type="email" autocomplete="email" required>
+            </label>
+            <label>
+              Password
+              <input name="password" type="password" autocomplete="current-password" required>
+            </label>
+            <button class="primary-button" type="submit">Sign In</button>
+          </form>
+
+          <form id="signupForm" class="auth-form hidden">
+            <label>
+              Name
+              <input name="name" type="text" autocomplete="name" required>
+            </label>
+            <label>
+              Email
+              <input name="email" type="email" autocomplete="email" required>
+            </label>
+            <label>
+              Password
+              <input name="password" type="password" autocomplete="new-password" minlength="6" required>
+            </label>
+            <button class="primary-button" type="submit">Create Account</button>
+          </form>
+          <p class="auth-status" id="authStatus">Use demo@paytrend.local / password123 to open the seeded demo workspace.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="app-shell hidden" id="appShell">
+      <aside class="sidebar" aria-label="Primary">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">
+            <span></span>
+          </div>
+          <div>
+            <strong>PayTrend</strong>
+            <small>Growth Intelligence</small>
+          </div>
+        </div>
+
+        <nav class="nav-list" aria-label="Dashboard sections">
+          <a class="active" href="#overview">
+            <span class="nav-icon" aria-hidden="true">01</span>
+            Overview
+          </a>
+          <a href="#forecast">
+            <span class="nav-icon" aria-hidden="true">02</span>
+            Forecasting
+          </a>
+          <a href="#transactions">
+            <span class="nav-icon" aria-hidden="true">03</span>
+            Transactions
+          </a>
+        </nav>
+
+        <div class="sidebar-panel">
+          <span class="panel-label">Workspace</span>
+          <strong id="workspaceName">Payments Control</strong>
+          <p>Track settlement volume, channel mix, and regional payment movement from a single operating view.</p>
+        </div>
+      </aside>
+
+      <main>
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Digital Payment Growth Analytics</p>
+            <h1>Payment intelligence for live growth decisions.</h1>
+            <p class="header-copy">Monitor transaction performance, segment demand, and forecast payment volume from one live operational dashboard.</p>
+          </div>
+          <div class="status-stack">
+            <div class="status-pill" id="apiStatus">Connecting to API</div>
+            <button class="secondary-button signout-button" id="signoutButton" type="button">Sign Out</button>
+            <small id="lastUpdated">Waiting for live data</small>
+          </div>
+        </header>
+
+        <section class="hero" id="overview">
+          <div class="hero-copy">
+            <div class="hero-kicker">Live payments operations</div>
+            <p>PayTrend consolidates payment activity, monitors growth signals, and projects future transaction volume from the latest settled transactions.</p>
+            <div class="hero-actions">
+              <a class="primary-button" href="#transactions">View Transactions</a>
+              <a class="secondary-button" href="#forecast">View Forecast</a>
+            </div>
+          </div>
+          <div class="hero-visual" aria-label="Payment activity visual">
+            <div class="visual-topline">
+              <span>Live Records</span>
+              <strong id="heroRecords">--</strong>
+            </div>
+            <div class="signal-bars" aria-hidden="true">
+              <span style="height: 42%"></span>
+              <span style="height: 58%"></span>
+              <span style="height: 49%"></span>
+              <span style="height: 71%"></span>
+              <span style="height: 63%"></span>
+              <span style="height: 86%"></span>
+              <span style="height: 74%"></span>
+              <span style="height: 92%"></span>
+            </div>
+            <div class="orbit-card volume">
+              <small>Current Volume</small>
+              <strong id="heroVolume">--</strong>
+            </div>
+            <div class="orbit-card growth">
+              <small>CAGR</small>
+              <strong id="heroGrowth">--</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="metric-grid" aria-label="Key metrics">
+          <article class="metric">
+            <span>Total Volume</span>
+            <strong id="totalVolume">--</strong>
+            <small>settled transaction value</small>
+          </article>
+          <article class="metric">
+            <span>Transactions</span>
+            <strong id="transactionCount">--</strong>
+            <small>records analyzed</small>
+          </article>
+          <article class="metric">
+            <span>Average Ticket</span>
+            <strong id="averageTransaction">--</strong>
+            <small>per transaction</small>
+          </article>
+          <article class="metric">
+            <span>Annualized CAGR</span>
+            <strong id="cagr">--</strong>
+            <small>based on monthly volume</small>
+          </article>
+        </section>
+
+        <section class="ops-grid" aria-label="Live transaction tools">
+          <article class="panel intake-panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Live Intake</p>
+                <h2>Add a transaction</h2>
+              </div>
+              <span id="formStatus">Ready</span>
+            </div>
+            <form id="transactionForm" class="transaction-form">
+              <label>
+                Date
+                <input name="date" type="date" required>
+              </label>
+              <label>
+                Merchant
+                <input name="merchant" type="text" placeholder="Merchant name" required>
+              </label>
+              <label>
+                Category
+                <input name="category" type="text" list="categoryOptions" placeholder="Category" required>
+              </label>
+              <label>
+                Method
+                <input name="method" type="text" list="methodOptions" placeholder="Payment method" required>
+              </label>
+              <label>
+                Region
+                <input name="region" type="text" list="regionOptions" placeholder="Region" required>
+              </label>
+              <label>
+                Amount
+                <input name="amount" type="number" min="0.01" step="0.01" placeholder="0.00" required>
+              </label>
+              <button class="primary-button form-action" type="submit">Add Transaction</button>
+            </form>
+            <datalist id="categoryOptions">
+              <option value="Retail"></option>
+              <option value="Ecommerce"></option>
+              <option value="Travel"></option>
+              <option value="Utilities"></option>
+              <option value="Healthcare"></option>
+              <option value="Subscriptions"></option>
+              <option value="Grocery"></option>
+            </datalist>
+            <datalist id="methodOptions">
+              <option value="UPI"></option>
+              <option value="Card"></option>
+              <option value="Wallet"></option>
+              <option value="NetBanking"></option>
+              <option value="Bank Transfer"></option>
+              <option value="Cash"></option>
+            </datalist>
+            <datalist id="regionOptions">
+              <option value="North"></option>
+              <option value="South"></option>
+              <option value="East"></option>
+              <option value="West"></option>
+              <option value="Central"></option>
+              <option value="International"></option>
+            </datalist>
+          </article>
+
+          <article class="panel quality-panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Insights</p>
+                <h2>What this view tracks</h2>
+              </div>
+            </div>
+            <div class="highlight-list">
+              <span>Live transaction volume across merchants and regions</span>
+              <span>Payment method and category concentration</span>
+              <span>Monthly growth movement and average ticket size</span>
+              <span>Forward-looking volume forecast for planning cycles</span>
+            </div>
+          </article>
+        </section>
+
+        <section class="dashboard-grid">
+          <article class="panel large">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Trend</p>
+                <h2>Monthly payment volume</h2>
+              </div>
+              <span id="trendScope">Live history</span>
+            </div>
+            <canvas id="monthlyChart" width="900" height="360" aria-label="Monthly volume chart"></canvas>
+          </article>
+
+          <article class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Mix</p>
+                <h2>Payment methods</h2>
+              </div>
+            </div>
+            <div id="methodMix" class="bar-list"></div>
+          </article>
+
+          <article class="panel" id="forecast">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Forecast</p>
+                <h2>Next 6 months</h2>
+              </div>
+              <strong id="projectedGrowth">--</strong>
+            </div>
+            <canvas id="forecastChart" width="540" height="320" aria-label="Forecast chart"></canvas>
+          </article>
+
+          <article class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Segments</p>
+                <h2>Category volume</h2>
+              </div>
+            </div>
+            <div id="categoryMix" class="bar-list"></div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Coverage</p>
+                <h2>Regional distribution</h2>
+              </div>
+            </div>
+            <div id="regionMix" class="region-grid"></div>
+          </article>
+
+          <article class="panel table-panel" id="transactions">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Ledger</p>
+                <h2>Recent transactions</h2>
+              </div>
+              <span>Latest settled payments</span>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Merchant</th>
+                    <th>Category</th>
+                    <th>Method</th>
+                    <th>Region</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody id="transactionRows"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
