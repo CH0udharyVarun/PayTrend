@@ -111,6 +111,7 @@ select {
 }
 
 .auth-card {
+  width: 100%;
   padding: 22px;
   border: 1px solid rgba(226, 232, 240, 0.94);
   border-radius: 18px;
@@ -131,12 +132,20 @@ select {
 }
 
 .auth-tabs button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
   min-height: 40px;
+  padding: 0 10px;
   border: 0;
   border-radius: 8px;
   color: var(--muted);
   background: transparent;
   font-weight: 850;
+  line-height: 1.1;
+  text-align: center;
+  white-space: nowrap;
   cursor: pointer;
 }
 
@@ -149,6 +158,7 @@ select {
 .auth-form {
   display: grid;
   gap: 14px;
+  width: 100%;
 }
 
 .auth-form label {
@@ -170,6 +180,10 @@ select {
   color: var(--ink);
   background: #ffffff;
   outline: 0;
+}
+
+.auth-form .primary-button {
+  width: 100%;
 }
 
 .auth-form input:focus {
@@ -932,6 +946,14 @@ th:last-child {
 
   .auth-layout {
     gap: 22px;
+  }
+
+  .auth-card {
+    padding: 18px;
+  }
+
+  .auth-tabs {
+    grid-template-columns: 1fr;
   }
 
   main {
